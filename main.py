@@ -1,4 +1,3 @@
-import requests
 import configparser
 import interface
 from pathlib import Path
@@ -39,23 +38,18 @@ except IOError:
         config.write(configfile)
 
 con = configC()
+playlist = ''
 
 
+# get info
 def main():
     api_service_name = "youtube"
     api_version = "v3"
     youtube = googleapiclient.discovery.build(
-        api_service_name, api_version, credentials=con.settings['apikey'])
+        api_service_name, api_version, developerKey=con.settings['apikey'])
 
     request = youtube.playlistItems().list(
         part="snippet",
-        playlistId=playlist
-    )
+        playlistId=playlist)
     response = request.execute()
-
     print(response)
-
-try:
-    main()
-except Exception as e:
-    print(e)
