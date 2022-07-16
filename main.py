@@ -14,11 +14,8 @@ class configC:
     def __init__(self):
         self.settings = {
             'apikey': config['settings']['apikey'],
-            'title': config['settings']['title'],
-            'yturl': config['settings']['yturl'],
-            'ploader': config['settings']['uploader'],
-            'date': config['settings']['date'],
-            'description': config['settings']['description']
+            'path': config['settings']['path'],
+            'export': config['settings']['export']
         }
 
 
@@ -29,11 +26,8 @@ except IOError:
     with open('config.ini', 'w') as configfile:
         config['settings'] = {
             'apikey': '',
-            'title': 'True',
-            'yturl': 'True',
-            'uploader': 'False',
-            'date': 'False',
-            'description': 'False'
+            'path': p,
+            'export': 'Title, URL'
         }
         config.write(configfile)
 
@@ -52,4 +46,20 @@ def main():
         part="snippet",
         playlistId=playlist)
     response = request.execute()
-    print(response)
+
+
+def saveset():
+    print('ok')
+
+
+def exportsh():
+    print('ex')
+
+
+# interface.dirpath.get()
+interface.savebut.config(command=saveset())
+interface.exportbut.config(command=exportsh())
+
+# populate fields
+
+interface.root.mainloop()
