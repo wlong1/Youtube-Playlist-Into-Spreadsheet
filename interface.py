@@ -1,19 +1,33 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter import messagebox
+from tkinter.messagebox import askyesno
+import sys
 import os
 from PIL import ImageTk, Image
+
+
+# set path
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+    return os.path.join(base_path, relative_path)
+
 
 # style
 root = Tk()
 root.title('Youtube Playlist Into Spreadsheet')
-root.geometry('800x600')
+root.geometry('850x570')
+root.iconbitmap(default=resource_path('icon.ico'))
 root.resizable(False, False)
 mfont = ('Georgia', 15)
 sfont = ('Georgia', 13)
 xsfont = ('Georgia', 12)
 
 # image
-pic = ImageTk.PhotoImage(Image.open('image.png'))
+pic = ImageTk.PhotoImage(Image.open(resource_path('image.png')))
 label1 = Label(image=pic)
 label1.pack(side=LEFT)
 
@@ -22,13 +36,15 @@ main = PanedWindow(root, background='#f1f1f1')
 main.pack(side=RIGHT, fill=BOTH, expand=True)
 
 # entry bars
+apifield = StringVar(root)
 apitxt = Label(main, text='API Key', font=mfont, background='#f1f1f1')
-apibox = Entry(main, bd=2, font=sfont)
+apibox = Entry(main, bd=2, textvariable=apifield, font=sfont)
 apitxt.pack(side=TOP, anchor=NW, pady=(20, 2), padx=30)
 apibox.pack(side=TOP, fill=X, padx=30)
 
+plfield = StringVar(root)
 plid = Label(main, text='Playlist ID', font=mfont, background='#f1f1f1')
-plbox = Entry(main, bd=2, font=sfont)
+plbox = Entry(main, bd=2, textvariable=plfield, font=sfont)
 plid.pack(side=TOP, anchor=NW, pady=(17, 5), padx=30)
 plbox.pack(side=TOP, fill=X, padx=30)
 
@@ -41,8 +57,6 @@ def askdir():
 
 
 dirpath = StringVar(root)
-dirpath.set(os.path.dirname(os.path.realpath(__file__)))
-
 dirframe = Frame(main, background='#f1f1f1')
 dirlabel = Label(main, text='Export To', font=mfont, background='#f1f1f1')
 dirlabel.pack(side=TOP, anchor=NW, pady=(17, 5), padx=30)
@@ -113,13 +127,13 @@ def list_toggle(item):
 c1but = Checkbutton(cframe, text='Title', command=lambda: list_toggle('Title'), font=xsfont)
 c2but = Checkbutton(cframe, text='URL', command=lambda: list_toggle('URL'), font=xsfont)
 c3but = Checkbutton(cframe, text='Uploader', command=lambda: list_toggle('Uploader'), font=xsfont)
-c4but = Checkbutton(cframe, text='Upload Date', command=lambda: list_toggle('Upload Date'), font=xsfont)
+c4but = Checkbutton(cframe, text='Date', command=lambda: list_toggle('Date'), font=xsfont)
 c5but = Checkbutton(cframe, text='Description', command=lambda: list_toggle('Description'), font=xsfont)
-c1but.grid(row=0, column=0, sticky=W, padx=(70, 30))
-c2but.grid(row=1, column=0, sticky=W, padx=(70, 30))
-c3but.grid(row=0, column=1, sticky=W, padx=(60, 0))
-c4but.grid(row=1, column=1, sticky=W, padx=(60, 0))
-c5but.grid(row=2, column=1, sticky=W, padx=(60, 0))
+c1but.grid(row=0, column=0, sticky=W, padx=(40, 0))
+c2but.grid(row=1, column=0, sticky=W, padx=(40, 0))
+c3but.grid(row=0, column=1, sticky=W, padx=(40, 0))
+c4but.grid(row=1, column=1, sticky=W, padx=(40, 0))
+c5but.grid(row=0, column=3, sticky=W, padx=(15, 0))
 
 # end buttons
 savebut = Button(main, text="Save Settings", width=15, font=xsfont)
