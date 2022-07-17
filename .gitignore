@@ -5,6 +5,7 @@ __pycache__/
 
 #config
 config.ini
+export.json
 
 # C extensions
 *.so
