@@ -3,7 +3,7 @@
 Export playlist data through Youtube API.
 
 ## How to use
-You need a Youtube API Key. If you don't have one, [Youtube has a guide on it](https://developers.google.com/youtube/v3/getting-started#before-you-start). You only need to follow steps 1-3.
+Requires a Youtube API Key. If you don't have one, [Youtube has a guide on it](https://developers.google.com/youtube/v3/getting-started#before-you-start). You only need to follow steps 1-3.
 
 The playlist ID is found at the end of the link, like so:
 `https://www.youtube.com/playlist?list=[Playlist ID]`
